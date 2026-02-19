@@ -2,13 +2,13 @@
 -- ML-Based Network Intrusion Detection System
 -- PostgreSQL Database Schema for intrusion_db
 -- DBMS Mini Project - SRMIST
--- Author: Aayushmaan Chakraborty & Shashank Prasad
+-- Authors: Aayushmaan Chakraborty & Shashank Prasad
 -- Date: February 2026
 
 -- This file contains only the schema (CREATE TABLE statements)
 -- No data, no SET commands, no pg_dump headers — clean for documentation and recreation
 
--- 1. Lookup tables
+-- 1. Lookup tables (unchanged)
 
 CREATE TABLE protocol_types (
     protocol_id   SERIAL PRIMARY KEY,
@@ -37,7 +37,7 @@ CREATE TABLE attack_types (
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
--- 2. Main fact table
+-- 2. Main fact table (TRIMMED to 18 columns as per latest decision)
 
 CREATE TABLE connections (
     connection_id               BIGSERIAL PRIMARY KEY,
@@ -69,5 +69,4 @@ CREATE INDEX idx_connections_service  ON connections(service_id);
 CREATE INDEX idx_connections_flag     ON connections(flag_id);
 CREATE INDEX idx_connections_attack   ON connections(attack_id);
 CREATE INDEX idx_connections_logged_in ON connections(logged_in);
-CREATE INDEX idx_connections_count     ON connections(count);;
-CREATE INDEX idx_connections_label    ON connections(attack_id);  -- since attack_id links to label/category
+CREATE INDEX idx_connections_count     ON connections(count);
